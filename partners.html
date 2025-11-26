@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lima-Plus Partnerships - Collaborate for Climate Resilience</title>
+    <meta name="description" content="Partner with Lima-Plus to build climate resilience for smallholder farmers. Explore collaboration opportunities, funding options, and partnership benefits.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-green: #1B4332;
+            --sage-green: #52796F;
+            --warm-earth: #A0522D;
+            --golden-harvest: #D4A574;
+            --success-green: #27AE60;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #f8fffe 0%, #f0f7f4 100%);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-green), var(--sage-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--sage-green);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--sage-green);
+        }
+        
+        .climate-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(27, 67, 50, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(82, 121, 111, 0.1) 0%, transparent 50%);
+        }
+        
+        .partner-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(27, 67, 50, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(27, 67, 50, 0.15);
+        }
+        
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(27, 67, 50, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(27, 67, 50, 0.1);
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        .progress-container {
+            background: #e5e7eb;
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--sage-green), var(--primary-green));
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .partner-logo {
+            width: 120px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(27, 67, 50, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(27, 67, 50, 0.15);
+        }
+    </style>
+</head>
+<body class="climate-pattern">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+    
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="resources/logo.jpg" class="h-10 w-auto mr-2">
+                    <div>
+                        <div class="text-2xl font-bold gradient-text">Lima-Plus</div>
+                        <div class="text-sm text-gray-600 hidden sm:block">Climate Resilience</div>
+                    </div>
+                </div>
+    
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link active">About</a>
+                    <a href="solution.html" class="nav-link">Solution</a>
+                    <a href="pilot.html" class="nav-link">Pilot</a>
+                    <a href="impact.html" class="nav-link">Impact</a>
+                    <a href="partners.html" class="nav-link">Partners</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </div>
+    
+                <!-- Mobile Button -->
+                <button class="menu-toggle md:hidden text-gray-700 hover:text-green-700 cursor-pointer">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    
+        <!-- Mobile Menu -->
+        <div class="mobile-menu hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 flex flex-col space-y-2">
+                <a href="index.html" class="block text-gray-700 hover:text-green-700">Home</a>
+                <a href="about.html" class="block text-gray-700 hover:text-green-700 font-semibold">About</a>
+                <a href="solution.html" class="block text-gray-700 hover:text-green-700">Solution</a>
+                <a href="pilot.html" class="block text-gray-700 hover:text-green-700">Pilot</a>
+                <a href="impact.html" class="block text-gray-700 hover:text-green-700">Impact</a>
+                <a href="partners.html" class="block text-gray-700 hover:text-green-700">Partners</a>
+                <a href="contact.html" class="block text-gray-700 hover:text-green-700">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuBtn = document.querySelector(".menu-toggle");
+        const mobileMenu = document.querySelector(".mobile-menu");
+    
+        menuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+    });
+    </script>
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-6">Partner With Us</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Join us in building climate resilience for Uganda's smallholder farmers. 
+                    Together, we can create sustainable agricultural solutions that transform communities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Value Proposition -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Why Partner With Lima-Plus?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    We offer unique opportunities to create meaningful impact while achieving your organization's goals
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="benefit-card p-8 rounded-xl text-center animate-on-scroll">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Proven Impact</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Join a platform with demonstrated results: 30-60% yield improvements, 
+                        25% income increases, and measurable climate resilience outcomes.
+                    </p>
+                </div>
+                
+                <div class="benefit-card p-8 rounded-xl text-center animate-on-scroll">
+                    <div class="text-4xl mb-4">🌍</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Scalable Model</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Our technology-enabled approach is designed for rapid scaling across 
+                        Uganda and other East African countries, maximizing your investment impact.
+                    </p>
+                </div>
+                
+                <div class="benefit-card p-8 rounded-xl text-center animate-on-scroll">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Data-Driven Insights</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Access comprehensive data on climate impacts, agricultural outcomes, 
+                        and community transformation for research and policy development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Partners -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Current Partners</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Working together with leading organizations in agriculture, climate, and development
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="partner-logo mx-auto">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-green-600">Coming Soon</div>
+                        <div class="text-xs text-gray-600 mt-1">Research Partner</div>
+                    </div>
+                </div>
+                
+                <div class="partner-logo mx-auto">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600">Open Slot</div>
+                        <div class="text-xs text-gray-600 mt-1">Development Partner</div>
+                    </div>
+                </div>
+                
+                <div class="partner-logo mx-auto">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-purple-600">Future Partner</div>
+                        <div class="text-xs text-gray-600 mt-1">Technical Partner</div>
+                    </div>
+                </div>
+                
+                <div class="partner-logo mx-auto">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-orange-600">Available</div>
+                        <div class="text-xs text-gray-600 mt-1">Implementation Partner</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center animate-on-scroll">
+                <p class="text-gray-600 mb-8">
+                    Interested in joining our partnership network? 
+                    We collaborate with NGOs, research institutions, government agencies, and private sector organizations.
+                </p>
+                <a href="#partnership-form" class="bg-green-600 text-white hover:bg-green-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">
+                    Become a Partner
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Opportunities -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Partnership Opportunities</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Multiple ways to collaborate based on your organization's strengths and interests
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="partner-card p-8 rounded-xl animate-on-scroll">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Funding Partners</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Support our scaling efforts through grants, investments, or program funding. 
+                        Help us reach more farmers and expand our impact across Uganda.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Program expansion funding
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Technology development
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Research and evaluation
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Available</span>
+                    </div>
+                </div>
+
+                <div class="partner-card p-8 rounded-xl animate-on-scroll">
+                    <div class="text-4xl mb-4">🔬</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Research Partners</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Collaborate on climate research, agricultural innovation, and impact studies. 
+                        Access our data and farmer networks for your research projects.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Climate adaptation research
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Agricultural innovation studies
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Impact evaluation
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Active</span>
+                    </div>
+                </div>
+
+                <div class="partner-card p-8 rounded-xl animate-on-scroll">
+                    <div class="text-4xl mb-4">🌱</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Implementation Partners</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Work with us on the ground to deliver training, support farmers, and implement 
+                        climate-smart agriculture programs in your communities.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-purple-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Farmer training programs
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-purple-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Community mobilization
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-purple-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Local extension services
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Seeking</span>
+                    </div>
+                </div>
+
+                <div class="partner-card p-8 rounded-xl animate-on-scroll">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Technology Partners</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Integrate your technology solutions with our platform or collaborate on 
+                        developing new tools for climate-smart agriculture.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Mobile app integration
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Weather data services
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            IoT sensor networks
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Open</span>
+                    </div>
+                </div>
+
+                <div class="partner-card p-8 rounded-xl animate-on-scroll">
+                    <div class="text-4xl mb-4">🏛️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Policy Partners</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Collaborate on policy development, advocacy, and creating enabling environments 
+                        for climate-smart agriculture at local and national levels.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Policy advocacy
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Regulatory framework
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Government relations
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Strategic</span>
+                    </div>
+                </div>
+
+                <div class="partner-card p-8 rounded-xl animate-on-scroll">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Market Partners</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Connect farmers to markets, provide fair pricing, and support the development 
+                        of sustainable agricultural value chains.
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-indigo-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Direct market access
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-indigo-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Fair trade premiums
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 text-indigo-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Value chain development
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Growing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Form -->
+    <section class="py-20 bg-gray-50" id="partnership-form">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Partnership Inquiry</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Tell us about your organization and how you'd like to collaborate with Lima-Plus
+                </p>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-8 animate-on-scroll">
+                <form id="partnership-form-element" class="space-y-6">
+                    <!-- Progress Bar -->
+                    <div class="progress-container mb-8">
+                        <div class="progress-bar" style="width: 25%;"></div>
+                    </div>
+                    
+                    <!-- Step 1: Organization Details -->
+                    <div class="form-step active">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">Organization Information</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="org-name" class="block text-sm font-semibold text-gray-700 mb-2">Organization Name *</label>
+                                <input type="text" id="org-name" name="org-name" required 
+                                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="org-type" class="block text-sm font-semibold text-gray-700 mb-2">Organization Type *</label>
+                                <select id="org-type" name="org-type" required 
+                                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    <option value="">Select type</option>
+                                    <option value="ngo">Non-Governmental Organization</option>
+                                    <option value="government">Government Agency</option>
+                                    <option value="research">Research Institution</option>
+                                    <option value="private">Private Company</option>
+                                    <option value="foundation">Foundation</option>
+                                    <option value="international">International Organization</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="contact-name" class="block text-sm font-semibold text-gray-700 mb-2">Contact Person Name *</label>
+                                <input type="text" id="contact-name" name="contact-name" required 
+                                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="contact-title" class="block text-sm font-semibold text-gray-700 mb-2">Job Title *</label>
+                                <input type="text" id="contact-title" name="contact-title" required 
+                                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
+                                <input type="email" id="email" name="email" required 
+                                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" 
+                                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="website" class="block text-sm font-semibold text-gray-700 mb-2">Website</label>
+                            <input type="url" id="website" name="website" 
+                                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Partnership Interest -->
+                    <div class="form-step">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">Partnership Interest</h3>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">Partnership Types (Select all that apply)</label>
+                            <div class="grid md:grid-cols-2 gap-3">
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="partnership-types" value="funding" class="mr-2">
+                                    <span class="text-sm">Funding Partner</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="partnership-types" value="research" class="mr-2">
+                                    <span class="text-sm">Research Partner</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="partnership-types" value="implementation" class="mr-2">
+                                    <span class="text-sm">Implementation Partner</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="partnership-types" value="technology" class="mr-2">
+                                    <span class="text-sm">Technology Partner</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="partnership-types" value="policy" class="mr-2">
+                                    <span class="text-sm">Policy Partner</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="partnership-types" value="market" class="mr-2">
+                                    <span class="text-sm">Market Partner</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="geographic-focus" class="block text-sm font-semibold text-gray-700 mb-2">Geographic Focus</label>
+                            <select id="geographic-focus" name="geographic-focus" 
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Select focus area</option>
+                                <option value="national">National - Uganda</option>
+                                <option value="regional">Regional - East Africa</option>
+                                <option value="central">Central Region</option>
+                                <option value="western">Western Region</option>
+                                <option value="northern">Northern Region</option>
+                                <option value="eastern">Eastern Region</option>
+                                <option value="specific">Specific Districts</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="timeline" class="block text-sm font-semibold text-gray-700 mb-2">Partnership Timeline</label>
+                            <select id="timeline" name="timeline" 
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Select timeline</option>
+                                <option value="immediate">Immediate (0-3 months)</option>
+                                <option value="short">Short-term (3-12 months)</option>
+                                <option value="medium">Medium-term (1-3 years)</option>
+                                <option value="long">Long-term (3+ years)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Resources & Capacity -->
+                    <div class="form-step">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">Resources & Capacity</h3>
+                        
+                        <div>
+                            <label for="budget-range" class="block text-sm font-semibold text-gray-700 mb-2">Budget Range (if applicable)</label>
+                            <select id="budget-range" name="budget-range" 
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Select budget range</option>
+                                <option value="under-50k">Under $50,000</option>
+                                <option value="50k-100k">$50,000 - $100,000</option>
+                                <option value="100k-500k">$100,000 - $500,000</option>
+                                <option value="500k-1m">$500,000 - $1,000,000</option>
+                                <option value="over-1m">Over $1,000,000</option>
+                                <option value="in-kind">In-kind support only</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="team-size" class="block text-sm font-semibold text-gray-700 mb-2">Team Size Available</label>
+                            <select id="team-size" name="team-size" 
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Select team size</option>
+                                <option value="1-5">1-5 people</option>
+                                <option value="6-15">6-15 people</option>
+                                <option value="16-50">16-50 people</option>
+                                <option value="51-100">51-100 people</option>
+                                <option value="over-100">Over 100 people</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="experience" class="block text-sm font-semibold text-gray-700 mb-2">Relevant Experience</label>
+                            <textarea id="experience" name="experience" rows="4" 
+                                      placeholder="Describe your organization's experience with climate resilience, agriculture, or related fields..."
+                                      class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Proposal Details -->
+                    <div class="form-step">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">Partnership Proposal</h3>
+                        
+                        <div>
+                            <label for="proposal" class="block text-sm font-semibold text-gray-700 mb-2">Partnership Proposal *</label>
+                            <textarea id="proposal" name="proposal" rows="6" required 
+                                      placeholder="Describe your proposed partnership, including objectives, activities, and expected outcomes..."
+                                      class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="goals" class="block text-sm font-semibold text-gray-700 mb-2">Partnership Goals</label>
+                            <textarea id="goals" name="goals" rows="4" 
+                                      placeholder="What do you hope to achieve through this partnership?"
+                                      class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="additional-info" class="block text-sm font-semibold text-gray-700 mb-2">Additional Information</label>
+                            <textarea id="additional-info" name="additional-info" rows="3" 
+                                      placeholder="Any other relevant information you'd like to share..."
+                                      class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between pt-8">
+                        <button type="button" class="prev-step bg-gray-500 text-white hover:bg-gray-600 px-6 py-3 rounded-lg font-semibold transition-colors" style="display: none;">
+                            Previous
+                        </button>
+                        <div class="flex-1"></div>
+                        <button type="button" class="next-step bg-green-600 text-white hover:bg-green-700 px-6 py-3 rounded-lg font-semibold transition-colors">
+                            Next Step
+                        </button>
+                        <button type="submit" class="submit-form bg-green-600 text-white hover:bg-green-700 px-6 py-3 rounded-lg font-semibold transition-colors" style="display: none;">
+                            Submit Proposal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gradient-to-br from-green-800 to-green-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                    Ready to Create Impact Together?
+                </h2>
+                <p class="text-xl text-green-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Whether you have questions about partnership opportunities or want to discuss 
+                    a specific collaboration idea, we're here to help you get started.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="#partnership-form" class="bg-white text-green-800 hover:bg-green-50 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">
+                        Submit Partnership Form
+                    </a>
+                    <a href="contact.html" class="border-2 border-white text-white hover:bg-white hover:text-green-800 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">
+                        Schedule a Call
+                    </a>
+                    <a href="about.html" class="text-white hover:text-green-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">
+                        Learn More About Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-bold gradient-text mb-4">Lima-Plus</div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Building climate resilience for Uganda's smallholder farmers through innovative 
+                        agritech solutions and community empowerment.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="solution.html" class="hover:text-white transition-colors">Our Solutions</a></li>
+                        <li><a href="pilot.html" class="hover:text-white transition-colors">Pilot Program</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="solution.html" class="hover:text-white transition-colors">Climate Tools</a></li>
+                        <li><a href="partners.html" class="hover:text-white transition-colors">Partnerships</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <p>📧 limaplus945@gmail.com</p>
+                        <p>📞 +256 761 056 390</p>
+                        <p>📍 Kampala, Uganda</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400 text-sm">
+                    © 2024 Lima-Plus Climate Resilience Agritech Platform. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>
