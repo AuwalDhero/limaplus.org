@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lima-Plus Pilot Program - 12-Month Climate Resilience Initiative</title>
+    <meta name="description" content="Learn about Lima-Plus 12-month pilot program targeting climate resilience for smallholder farmers in Uganda with measurable impact goals.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-green: #1B4332;
+            --sage-green: #52796F;
+            --warm-earth: #A0522D;
+            --golden-harvest: #D4A574;
+            --success-green: #27AE60;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #f8fffe 0%, #f0f7f4 100%);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-green), var(--sage-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--sage-green);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--sage-green);
+        }
+        
+        .climate-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(27, 67, 50, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(82, 121, 111, 0.1) 0%, transparent 50%);
+        }
+        
+        .timeline-container {
+            position: relative;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--sage-green), var(--primary-green));
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 1.5rem;
+            top: 1rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--sage-green);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--sage-green);
+        }
+        
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(27, 67, 50, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(27, 67, 50, 0.15);
+        }
+        
+        .metric-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(27, 67, 50, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(27, 67, 50, 0.1);
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--sage-green), var(--primary-green));
+            height: 8px;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body class="climate-pattern">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+    
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="resources/logo.jpg" class="h-10 w-auto mr-2">
+                    <div>
+                        <div class="text-2xl font-bold gradient-text">Lima-Plus</div>
+                        <div class="text-sm text-gray-600 hidden sm:block">Climate Resilience</div>
+                    </div>
+                </div>
+    
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link active">About</a>
+                    <a href="solution.html" class="nav-link">Solution</a>
+                    <a href="pilot.html" class="nav-link">Pilot</a>
+                    <a href="impact.html" class="nav-link">Impact</a>
+                    <a href="partners.html" class="nav-link">Partners</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </div>
+    
+                <!-- Mobile Button -->
+                <button class="menu-toggle md:hidden text-gray-700 hover:text-green-700 cursor-pointer">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    
+        <!-- Mobile Menu -->
+        <div class="mobile-menu hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 flex flex-col space-y-2">
+                <a href="index.html" class="block text-gray-700 hover:text-green-700">Home</a>
+                <a href="about.html" class="block text-gray-700 hover:text-green-700 font-semibold">About</a>
+                <a href="solution.html" class="block text-gray-700 hover:text-green-700">Solution</a>
+                <a href="pilot.html" class="block text-gray-700 hover:text-green-700">Pilot</a>
+                <a href="impact.html" class="block text-gray-700 hover:text-green-700">Impact</a>
+                <a href="partners.html" class="block text-gray-700 hover:text-green-700">Partners</a>
+                <a href="contact.html" class="block text-gray-700 hover:text-green-700">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuBtn = document.querySelector(".menu-toggle");
+        const mobileMenu = document.querySelector(".mobile-menu");
+    
+        menuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+    });
+    </script>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-6">Pilot Program</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    A comprehensive 12-month initiative to demonstrate climate resilience impact 
+                    for smallholder farmers across Uganda
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Overview Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Program Overview</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Our pilot program is designed to validate our climate resilience approach 
+                    and demonstrate measurable impact in real farming communities
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="metric-card p-8 rounded-xl text-center animate-on-scroll">
+                    <div class="text-4xl font-bold text-green-600 mb-2">12</div>
+                    <div class="text-lg font-semibold text-gray-800 mb-2">Months Duration</div>
+                    <div class="text-gray-600">Comprehensive implementation and monitoring period</div>
+                </div>
+                
+                <div class="metric-card p-8 rounded-xl text-center animate-on-scroll">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">2000</div>
+                    <div class="text-lg font-semibold text-gray-800 mb-2">Target Farmers</div>
+                    <div class="text-gray-600">Smallholder farmers across multiple regions</div>
+                </div>
+                
+                <div class="metric-card p-8 rounded-xl text-center animate-on-scroll">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">8</div>
+                    <div class="text-lg font-semibold text-gray-800 mb-2">Communities</div>
+                    <div class="text-gray-600">Rural communities in 4 regions of Uganda</div>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-8 animate-on-scroll">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Program Objectives</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Primary Objectives</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Demonstrate 30% increase in crop yields through climate-smart practices
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Reduce crop loss from climate events by 40%
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Improve household income by 25% through better market access
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Build sustainable farmer networks and cooperatives
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Secondary Objectives</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Validate technology platform effectiveness
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Document best practices for scaling
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Establish partnerships with local organizations
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Create replicable implementation model
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Implementation Timeline</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    A phased approach to ensure sustainable implementation and meaningful impact measurement
+                </p>
+            </div>
+            
+            <div class="timeline-container max-w-4xl mx-auto animate-on-scroll">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Phase 1: Foundation & Setup</h3>
+                            <span class="ml-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Months 1-2</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Establish partnerships with local organizations, recruit farmer participants, 
+                            and set up monitoring systems. Conduct baseline assessments and community engagement.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Key Activities</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Partner with local farmer organizations</li>
+                                    <li>• Recruit 300 pilot farmers</li>
+                                    <li>• Conduct baseline surveys</li>
+                                    <li>• Install weather monitoring stations</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Expected Outcomes</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 300 farmers enrolled</li>
+                                    <li>• Baseline data collected</li>
+                                    <li>• Partnerships established</li>
+                                    <li>• Infrastructure deployed</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Phase 2: Training & Capacity Building</h3>
+                            <span class="ml-4 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Months 3-5</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Deliver comprehensive training programs on climate-smart agriculture practices, 
+                            technology adoption, and sustainable farming methods.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Training Modules</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Climate-smart agriculture practices</li>
+                                    <li>• Water conservation techniques</li>
+                                    <li>• Soil health management</li>
+                                    <li>• Pest and disease management</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Technology Training</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Mobile app usage</li>
+                                    <li>• Weather alert systems</li>
+                                    <li>• Market price tracking</li>
+                                    <li>• Record keeping tools</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Phase 3: Implementation & Support</h3>
+                            <span class="ml-4 bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Months 6-10</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Full deployment of climate-smart practices with continuous support, 
+                            monitoring, and adaptive management based on real-time feedback.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Implementation Areas</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Crop diversification strategies</li>
+                                    <li>• Water harvesting systems</li>
+                                    <li>• Improved seed varieties</li>
+                                    <li>• Agroforestry practices</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Support Systems</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Regular extension visits</li>
+                                    <li>• Peer learning groups</li>
+                                    <li>• Climate alert services</li>
+                                    <li>• Market linkage support</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">Phase 4: Evaluation & Scaling</h3>
+                            <span class="ml-4 bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Months 11-12</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Comprehensive impact assessment, documentation of best practices, 
+                            and development of scaling strategy for broader implementation.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Evaluation Metrics</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Yield improvement measurements</li>
+                                    <li>• Income impact analysis</li>
+                                    <li>• Climate resilience indicators</li>
+                                    <li>• Technology adoption rates</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">Scaling Preparation</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Best practice documentation</li>
+                                    <li>• Partnership expansion plan</li>
+                                    <li>• Funding strategy development</li>
+                                    <li>• Policy recommendation framework</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Communities Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Target Communities</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Strategic selection of communities representing diverse agricultural systems and climate challenges
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="metric-card p-6 rounded-xl text-center animate-on-scroll">
+                    <div class="text-3xl mb-4">🌾</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Central Region</h3>
+                    <p class="text-gray-600 text-sm mb-4">Maize and coffee farming communities</p>
+                    <div class="text-2xl font-bold text-green-600 mb-1">2</div>
+                    <div class="text-sm text-gray-600">Communities</div>
+                </div>
+                
+                <div class="metric-card p-6 rounded-xl text-center animate-on-scroll">
+                    <div class="text-3xl mb-4">🍌</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Western Region</h3>
+                    <p class="text-gray-600 text-sm mb-4">Banana and bean farming systems</p>
+                    <div class="text-2xl font-bold text-blue-600 mb-1">2</div>
+                    <div class="text-sm text-gray-600">Communities</div>
+                </div>
+                
+                <div class="metric-card p-6 rounded-xl text-center animate-on-scroll">
+                    <div class="text-3xl mb-4">🌾</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Northern Region</h3>
+                    <p class="text-gray-600 text-sm mb-4">Sorghum and millet dryland farming</p>
+                    <div class="text-2xl font-bold text-purple-600 mb-1">2</div>
+                    <div class="text-sm text-gray-600">Communities</div>
+                </div>
+                
+                <div class="metric-card p-6 rounded-xl text-center animate-on-scroll">
+                    <div class="text-3xl mb-4">🌱</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Eastern Region</h3>
+                    <p class="text-gray-600 text-sm mb-4">Mixed crop-livestock systems</p>
+                    <div class="text-2xl font-bold text-orange-600 mb-1">2</div>
+                    <div class="text-sm text-gray-600">Communities</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Targets Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Impact Targets</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Measurable outcomes that demonstrate the effectiveness of our climate resilience approach
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="metric-card p-6 rounded-xl animate-on-scroll">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Yield Improvement</h3>
+                        <div class="text-2xl">📈</div>
+                    </div>
+                    <div class="text-3xl font-bold text-green-600 mb-2">30%</div>
+                    <p class="text-gray-600 text-sm mb-4">Average increase in crop yields</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="progress-bar w-0 h-2 rounded-full" data-progress="30"></div>
+                    </div>
+                </div>
+                
+                <div class="metric-card p-6 rounded-xl animate-on-scroll">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Income Increase</h3>
+                        <div class="text-2xl">💰</div>
+                    </div>
+                    <div class="text-3xl font-bold text-blue-600 mb-2">25%</div>
+                    <p class="text-gray-600 text-sm mb-4">Household income improvement</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="progress-bar w-0 h-2 rounded-full" data-progress="25"></div>
+                    </div>
+                </div>
+                
+                <div class="metric-card p-6 rounded-xl animate-on-scroll">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Climate Resilience</h3>
+                        <div class="text-2xl">🛡️</div>
+                    </div>
+                    <div class="text-3xl font-bold text-purple-600 mb-2">40%</div>
+                    <p class="text-gray-600 text-sm mb-4">Reduction in climate-related losses</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="progress-bar w-0 h-2 rounded-full" data-progress="40"></div>
+                    </div>
+                </div>
+                
+                <div class="metric-card p-6 rounded-xl animate-on-scroll">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-gray-800">Technology Adoption</h3>
+                        <div class="text-2xl">📱</div>
+                    </div>
+                    <div class="text-3xl font-bold text-orange-600 mb-2">80%</div>
+                    <p class="text-gray-600 text-sm mb-4">Active platform usage rate</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="progress-bar w-0 h-2 rounded-full" data-progress="80"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gradient-to-br from-green-800 to-green-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                    Join Our Pilot Program
+                </h2>
+                <p class="text-xl text-green-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Whether you're a farmer, community leader, or partner organization, 
+                    there are opportunities to participate in our climate resilience pilot program.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="contact.html" class="bg-white text-green-800 hover:bg-green-50 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">
+                        Apply for Pilot
+                    </a>
+                    <a href="partners.html" class="border-2 border-white text-white hover:bg-white hover:text-green-800 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">
+                        Partner With Us
+                    </a>
+                    <a href="impact.html" class="text-white hover:text-green-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300">
+                        See Expected Impact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-bold gradient-text mb-4">Lima-Plus</div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Building climate resilience for Uganda's smallholder farmers through innovative 
+                        agritech solutions and community empowerment.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="solution.html" class="hover:text-white transition-colors">Our Solutions</a></li>
+                        <li><a href="pilot.html" class="hover:text-white transition-colors">Pilot Program</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="solution.html" class="hover:text-white transition-colors">Climate Tools</a></li>
+                        <li><a href="partners.html" class="hover:text-white transition-colors">Partnerships</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <p>📧 limaplus945@gmail.com</p>
+                        <p>📞 +256 761 056 390</p>
+                        <p>📍 Kampala, Uganda</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400 text-sm">
+                    © 2024 Lima-Plus Climate Resilience Agritech Platform. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+    
+    <!-- Initialize progress bars -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const progressBar = entry.target;
+                        const progress = progressBar.getAttribute('data-progress');
+                        
+                        anime({
+                            targets: progressBar,
+                            width: progress + '%',
+                            duration: 1500,
+                            easing: 'easeOutQuart'
+                        });
+                        
+                        observer.unobserve(progressBar);
+                    }
+                });
+            });
+            
+            progressBars.forEach(bar => observer.observe(bar));
+        });
+    </script>
+</body>
+</html>
