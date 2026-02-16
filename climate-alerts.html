@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lima-Plus Climate Alerts Demo</title>
+    <meta name="description" content="Interactive demo of Lima-Plus Climate Alerts: 7-day forecasts, seasonal outlooks, and extreme weather warnings for Ugandan farmers.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-green: #1B4332;
+            --sage-green: #52796F;
+            --warm-earth: #A0522D;
+            --golden-harvest: #D4A574;
+            --success-green: #27AE60;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #f8fffe 0%, #f0f7f4 100%);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-green), var(--sage-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .alert-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(27, 67, 50, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .alert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(27, 67, 50, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Back to Solutions -->
+    <div class="pt-8 text-center">
+        <a href="solution.html" class="text-green-700 hover:text-green-800 font-semibold text-lg underline">
+            ← Back to Solutions
+        </a>
+    </div>
+
+    <!-- Navigation (no Climate Alerts link) -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="resources/logo.jpeg" alt="Lima-Plus Logo" class="h-10 w-auto mr-2">
+                    <div class="text-2xl font-bold gradient-text">Lima-Plus</div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="solution.html" class="nav-link">Solutions</a>
+                    <a href="problem.html" class="nav-link">Challenges</a>
+                    <a href="pilot.html" class="nav-link">Pilot</a>
+                    <a href="impact.html" class="nav-link">Impact</a>
+                    <a href="partners.html" class="nav-link">Partners</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </div>
+                <button class="menu-toggle md:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-menu hidden md:hidden bg-white shadow-lg">
+            <a href="index.html" class="block px-4 py-3 hover:bg-gray-100">Home</a>
+            <a href="about.html" class="block px-4 py-3 hover:bg-gray-100">About</a>
+            <a href="solution.html" class="block px-4 py-3 hover:bg-gray-100">Solutions</a>
+            <a href="problem.html" class="block px-4 py-3 hover:bg-gray-100">Challenges</a>
+            <a href="pilot.html" class="block px-4 py-3 hover:bg-gray-100">Pilot</a>
+            <a href="impact.html" class="block px-4 py-3 hover:bg-gray-100">Impact</a>
+            <a href="partners.html" class="block px-4 py-3 hover:bg-gray-100">Partners</a>
+            <a href="contact.html" class="block px-4 py-3 hover:bg-gray-100">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-green-900 to-green-700 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-on-scroll">Climate Alerts Demo</h1>
+            <p class="text-xl max-w-4xl mx-auto opacity-90 animate-on-scroll">
+                Live 7-day forecasts and derived alerts powered by Open-Meteo. Seasonal outlook uses static mock data.
+            </p>
+        </div>
+    </section>
+
+    <!-- Alerts Dashboard -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <!-- 7-Day Weather Forecast Card -->
+                <div class="alert-card rounded-2xl overflow-hidden animate-on-scroll">
+                    <div class="bg-gradient-to-r from-green-700 to-green-600 text-white p-4">
+                        <h3 class="text-lg font-semibold">7-Day Weather Forecast</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <p id="location-display" class="font-medium">Location: Loading...</p>
+                            <button id="change-location-btn" class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700">Change</button>
+                        </div>
+                        <div id="current-weather" class="text-center mb-6">
+                            <p class="text-4xl font-bold">Loading...</p>
+                        </div>
+                        <div class="grid grid-cols-7 gap-2 text-center mb-4">
+                            <div id="daily-forecasts">Loading...</div>
+                        </div>
+                        <div id="forecast-tip" class="bg-yellow-50 border border-yellow-200 rounded p-3 text-sm">
+                            Loading tip...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seasonal Climate Outlook Card -->
+                <div class="alert-card rounded-2xl overflow-hidden animate-on-scroll">
+                    <div class="bg-gradient-to-r from-green-700 to-green-600 text-white p-4">
+                        <h3 class="text-lg font-semibold">Seasonal Climate Outlook</h3>
+                    </div>
+                    <div class="p-6">
+                        <p id="seasonal-months" class="mb-4 font-medium">Loading...</p>
+                        <div class="space-y-6">
+                            <div>
+                                <p class="mb-2">Rainfall Outlook</p>
+                                <div class="flex items-center gap-2">
+                                    <div class="flex-1 bg-gray-200 h-8 rounded overflow-hidden"><div class="bg-blue-600 h-full rain-bar"></div></div>
+                                    <div class="flex-1 bg-gray-200 h-8 rounded overflow-hidden"><div class="bg-green-600 h-full rain-bar"></div></div>
+                                    <div class="flex-1 bg-gray-200 h-8 rounded overflow-hidden"><div class="bg-yellow-600 h-full rain-bar"></div></div>
+                                </div>
+                                <div id="rain-labels" class="flex justify-between text-xs mt-1"></div>
+                            </div>
+                            <div id="temp-note" class="text-center"></div>
+                        </div>
+                        <p id="seasonal-advice" class="mt-4 text-sm bg-yellow-50 p-3 rounded">Loading...</p>
+                    </div>
+                </div>
+
+                <!-- Extreme Weather Alerts Card -->
+                <div class="alert-card rounded-2xl overflow-hidden animate-on-scroll">
+                    <div class="bg-gradient-to-r from-green-700 to-green-600 text-white p-4">
+                        <h3 class="text-lg font-semibold">Extreme Weather Alerts</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="mb-4">Active Alerts for <span id="alert-location">Loading...</span></p>
+                        <div id="extreme-alerts" class="space-y-4 mb-6">
+                            Loading...
+                        </div>
+                        <p class="mb-3 text-sm font-semibold">Get Alerts Via:</p>
+                        <div class="flex flex-wrap gap-3">
+                            <button class="bg-green-700 text-white px-4 py-2 rounded flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> SMS
+                            </button>
+                            <button class="bg-green-600 text-white px-4 py-2 rounded flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2.19 13.77l-3.54-3.54 1.41-1.41 2.12 2.12 5.3-5.3 1.41 1.41-6.71 6.72z"/></svg> WhatsApp
+                            </button>
+                            <button class="bg-gray-700 text-white px-4 py-2 rounded">Mobile App</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-2xl font-bold gradient-text mb-4">Lima-Plus</div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Building climate resilience for Uganda's smallholder farmers through innovative agritech solutions and community empowerment.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="solution.html" class="hover:text-white transition-colors">Our Solutions</a></li>
+                        <li><a href="problem.html" class="hover:text-white transition-colors">Challenges</a></li>
+                        <li><a href="pilot.html" class="hover:text-white transition-colors">Pilot Program</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="solution.html" class="hover:text-white transition-colors">Climate Tools</a></li>
+                        <li><a href="partners.html" class="hover:text-white transition-colors">Partnerships</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <p>📧 limaplus945@gmail.com</p>
+                        <p>📞 +256 761 056 390</p>
+                        <p>📍 Kampala, Uganda</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400 text-sm">
+                    © 2024 Lima-Plus Climate Resilience Agritech Platform. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        const weatherCodes = {
+            0: { desc: "Clear sky", icon: "☀️" },
+            1: { desc: "Mainly clear", icon: "🌤️" },
+            2: { desc: "Partly cloudy", icon: "⛅" },
+            3: { desc: "Overcast", icon: "☁️" },
+            45: { desc: "Fog", icon: "🌫️" },
+            48: { desc: "Depositing rime fog", icon: "🌫️" },
+            51: { desc: "Light drizzle", icon: "🌦️" },
+            53: { desc: "Moderate drizzle", icon: "🌧️" },
+            55: { desc: "Dense drizzle", icon: "🌧️" },
+            56: { desc: "Light freezing drizzle", icon: "🌨️" },
+            57: { desc: "Dense freezing drizzle", icon: "🌨️" },
+            61: { desc: "Slight rain", icon: "🌦️" },
+            63: { desc: "Moderate rain", icon: "🌧️" },
+            65: { desc: "Heavy rain", icon: "🌧️" },
+            66: { desc: "Light freezing rain", icon: "🌨️" },
+            67: { desc: "Heavy freezing rain", icon: "🌨️" },
+            71: { desc: "Slight snow fall", icon: "❄️" },
+            73: { desc: "Moderate snow fall", icon: "❄️" },
+            75: { desc: "Heavy snow fall", icon: "❄️" },
+            77: { desc: "Snow grains", icon: "❄️" },
+            80: { desc: "Slight rain showers", icon: "🌦️" },
+            81: { desc: "Moderate rain showers", icon: "🌧️" },
+            82: { desc: "Violent rain showers", icon: "🌧️" },
+            85: { desc: "Slight snow showers", icon: "❄️" },
+            86: { desc: "Heavy snow showers", icon: "❄️" },
+            95: {
+                desc: "Thunderstorm", icon: "⛈️" },
+            96: { desc: "Thunderstorm with slight hail", icon: "⛈️" },
+            99: { desc: "Thunderstorm with heavy hail", icon: "⛈️" }
+        };
+
+        const defaultLat = 0.3476;
+        const defaultLon = 32.5825;
+        let currentLat = defaultLat;
+        let currentLon = defaultLon;
+        let currentLocationName = "Kampala, Uganda";
+
+        async function fetchWeather(lat, lon) {
+            try {
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weathercode,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum&timezone=auto`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+
+                const currentInfo = weatherCodes[data.current?.weathercode] || { desc: "Unknown", icon: "🌤️" };
+                document.getElementById('current-weather').innerHTML = `
+                    <p class="text-4xl font-bold">${data.current ? Math.round(data.current.temperature_2m) : '--'}°C ${currentInfo.icon}</p>
+                    <p class="text-lg">${currentInfo.desc}</p>
+                    <p class="text-sm">Wind: ${data.current ? Math.round(data.current.windspeed_10m) : '--'} km/h</p>
+                `;
+
+                if (data.daily?.time?.length >= 7) {
+                    const dailyHTML = data.daily.time.slice(0, 7).map((date, i) => {
+                        const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
+                        const codeInfo = weatherCodes[data.daily.weathercode[i]] || { icon: "🌤️" };
+                        return `
+                            <div>
+                                <p class="text-xs">${dayName}</p>
+                                <p class="text-2xl">${codeInfo.icon}</p>
+                                <p class="text-xs">${data.daily.temperature_2m_max[i]}°<br>${data.daily.temperature_2m_min[i]}°</p>
+                                <p class="text-xs">${data.daily.precipitation_probability_max[i]}%</p>
+                            </div>
+                        `;
+                    }).join('');
+                    document.getElementById('daily-forecasts').innerHTML = dailyHTML;
+                } else {
+                    document.getElementById('daily-forecasts').innerHTML = '<p class="text-sm text-gray-500">Forecast unavailable</p>';
+                }
+
+                const daily = data.daily || {};
+                const hasHeavyRain = (daily.precipitation_probability_max?.some(p => p > 80) || daily.precipitation_sum?.some(s => s > 20)) ?? false;
+                const hasHeatwave = daily.temperature_2m_max?.some(t => t > 35) ?? false;
+                let tip = "Monitor conditions and plan activities accordingly.";
+                if (hasHeavyRain) tip = "Heavy rain possible. Protect young crops and prepare drainage.";
+                if (hasHeatwave) tip += " Heatwave risk – ensure irrigation.";
+                if (!hasHeavyRain && !hasHeatwave) tip = "Favorable conditions ahead. Great for field activities.";
+                document.getElementById('forecast-tip').innerHTML = `<strong>Tip:</strong> ${tip}`;
+
+                updateExtremeAlerts(daily);
+
+            } catch (err) {
+                console.warn('Weather fetch failed:', err);
+                document.getElementById('current-weather').innerHTML = '<p class="text-red-600">Weather data unavailable</p>';
+                document.getElementById('daily-forecasts').innerHTML = '<p class="text-sm text-gray-500">Try again later</p>';
+                document.getElementById('forecast-tip').innerHTML = '<strong>Tip:</strong> Check connection and retry.';
+                document.getElementById('extreme-alerts').innerHTML = '<p class="text-gray-500">Alerts unavailable</p>';
+            } finally {
+                document.getElementById('location-display').textContent = `Location: ${currentLocationName}`;
+                document.getElementById('alert-location').textContent = currentLocationName;
+            }
+        }
+
+        async function fetchSeasonal(lat, lon) {
+            try {
+                throw new Error('Seasonal endpoint unavailable');
+            } catch (err) {
+                console.warn('Seasonal data unavailable (expected)');
+                document.getElementById('seasonal-months').textContent = 'Upcoming Season: April - June';
+                document.querySelectorAll('.rain-bar')[0].style.width = '25%';
+                document.querySelectorAll('.rain-bar')[1].style.width = '45%';
+                document.querySelectorAll('.rain-bar')[2].style.width = '30%';
+                document.getElementById('rain-labels').innerHTML = `
+                    <span>Below Normal 25%</span>
+                    <span>Normal 45%</span>
+                    <span>Above Normal 30%</span>
+                `;
+                document.getElementById('temp-note').innerHTML = '<p class="bg-red-100 text-red-800 px-4 py-2 rounded font-semibold">Hotter Than Usual</p>';
+                document.getElementById('seasonal-advice').innerHTML = `
+                    Forecast: Increased temperatures and below average rainfall expected.<br>
+                    <strong>Advice:</strong> Consider drought-resistant crops. Prepare for water conservation.
+                `;
+            }
+        }
+
+        function updateExtremeAlerts(daily) {
+            const container = document.getElementById('extreme-alerts');
+            container.innerHTML = '';
+
+            let hasAlerts = false;
+
+            if (daily.temperature_2m_max?.some(t => t > 35)) {
+                hasAlerts = true;
+                container.innerHTML += `
+                    <div class="bg-orange-50 border border-orange-200 rounded p-4 flex items-start gap-3">
+                        <span class="text-2xl">🔥</span>
+                        <div>
+                            <p class="font-semibold text-orange-800">Heatwave Alert</p>
+                            <p class="text-sm">High temperatures above 35°C expected. Ensure proper irrigation.</p>
+                        </div>
+                    </div>`;
+            }
+
+            const heavyRainDays = daily.precipitation_probability_max?.map((p, i) => p > 80 || (daily.precipitation_sum?.[i] ?? 0) > 20) || [];
+            if (heavyRainDays.some(Boolean)) {
+                hasAlerts = true;
+                container.innerHTML += `
+                    <div class="bg-red-50 border border-red-200 rounded p-4 flex items-start gap-3">
+                        <span class="text-2xl">⚠️</span>
+                        <div>
+                            <p class="font-semibold text-red-800">Heavy Rain Warning</p>
+                            <p class="text-sm">Strong rains expected. Protect young crops.</p>
+                        </div>
+                    </div>`;
+            }
+
+            if (!hasAlerts) {
+                container.innerHTML = '<p class="text-green-700">No extreme weather alerts active.</p>';
+            }
+        }
+
+        document.getElementById('change-location-btn').addEventListener('click', () => {
+            const loc = prompt("Enter location (village, district, or city in Uganda):", currentLocationName);
+            if (!loc) return;
+            fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(loc)}&count=1`)
+                .then(r => r.json())
+                .then(d => {
+                    if (d.results && d.results.length > 0) {
+                        const res = d.results[0];
+                        currentLat = res.latitude;
+                        currentLon = res.longitude;
+                        currentLocationName = res.name + (res.admin1 ? `, ${res.admin1}` : "") + ", Uganda";
+                        fetchWeather(currentLat, currentLon);
+                        fetchSeasonal(currentLat, currentLon);
+                    } else {
+                        alert("Location not found. Using default.");
+                    }
+                })
+                .catch(() => alert("Geocoding failed. Using default."));
+        });
+
+        fetchWeather(defaultLat, defaultLon);
+        fetchSeasonal(defaultLat, defaultLon);
+    </script>
+</body>
+</html>
