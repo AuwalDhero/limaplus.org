@@ -74,42 +74,67 @@
         </a>
     </div>
 
-    <!-- Navigation (no Climate Alerts link) -->
-    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <img src="resources/logo.jpeg" alt="Lima-Plus Logo" class="h-10 w-auto mr-2">
+   <!-- NAVIGATION (unchanged – inherits global design) -->
+<nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+
+            <!-- Logo -->
+            <div class="flex items-center">
+                <img src="resources/logo.jpeg" class="h-10 w-auto mr-2">
+                <div>
                     <div class="text-2xl font-bold gradient-text">Lima-Plus</div>
+                    <div class="text-sm text-gray-600 hidden sm:block">Climate Resilience</div>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="solution.html" class="nav-link">Solutions</a>
-                    <a href="problem.html" class="nav-link">Challenges</a>
-                    <a href="pilot.html" class="nav-link">Pilot</a>
-                    <a href="impact.html" class="nav-link">Impact</a>
-                    <a href="partners.html" class="nav-link">Partners</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </div>
-                <button class="menu-toggle md:hidden">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
             </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <a href="problem.html" class="nav-link active">Challenges</a>
+                <a href="solution.html" class="nav-link">Solution</a>
+                <a href="pilot.html" class="nav-link">Pilot</a>
+                <a href="impact.html" class="nav-link">Impact</a>
+                <a href="partners.html" class="nav-link">Partners</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+
+            <!-- Mobile Button -->
+            <button class="menu-toggle md:hidden text-gray-700 hover:text-green-700 cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         </div>
-        <div class="mobile-menu hidden md:hidden bg-white shadow-lg">
-            <a href="index.html" class="block px-4 py-3 hover:bg-gray-100">Home</a>
-            <a href="about.html" class="block px-4 py-3 hover:bg-gray-100">About</a>
-            <a href="solution.html" class="block px-4 py-3 hover:bg-gray-100">Solutions</a>
-            <a href="problem.html" class="block px-4 py-3 hover:bg-gray-100">Challenges</a>
-            <a href="pilot.html" class="block px-4 py-3 hover:bg-gray-100">Pilot</a>
-            <a href="impact.html" class="block px-4 py-3 hover:bg-gray-100">Impact</a>
-            <a href="partners.html" class="block px-4 py-3 hover:bg-gray-100">Partners</a>
-            <a href="contact.html" class="block px-4 py-3 hover:bg-gray-100">Contact</a>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu hidden md:hidden bg-white border-t">
+        <div class="px-4 py-4 flex flex-col space-y-2">
+            <a href="index.html" class="block text-gray-700 hover:text-green-700">Home</a>
+            <a href="about.html" class="block text-gray-700 hover:text-green-700 font-semibold">About</a>
+            <a href="problem.html" class="block text-gray-700 hover:text-green-700">Challenges</a>
+            <a href="solution.html" class="block text-gray-700 hover:text-green-700">Solution</a>
+            <a href="pilot.html" class="block text-gray-700 hover:text-green-700">Pilot</a>
+            <a href="impact.html" class="block text-gray-700 hover:text-green-700">Impact</a>
+            <a href="partners.html" class="block text-gray-700 hover:text-green-700">Partners</a>
+            <a href="contact.html" class="block text-gray-700 hover:text-green-700">Contact</a>
         </div>
-    </nav>
+    </div>
+</nav>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.querySelector(".menu-toggle");
+    const mobileMenu = document.querySelector(".mobile-menu");
+
+    menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+    });
+});
+</script>
 
     <!-- Hero -->
     <section class="pt-24 pb-12 bg-gradient-to-br from-green-900 to-green-700 text-white">
