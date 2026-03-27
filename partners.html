@@ -514,7 +514,7 @@
         </div>
     </section>
 
-    <!-- Partnership Form -->
+           <!-- Partnership Form -->
     <section class="py-20 bg-gray-50" id="partnership-form">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 animate-on-scroll">
@@ -525,14 +525,15 @@
             </div>
             
             <div class="bg-white rounded-xl shadow-lg p-8 animate-on-scroll">
-                <form id="partnership-form-element" class="space-y-6">
+                <form id="partnership-form-element" action="/submit-partnership" method="POST" class="space-y-6">
+                    
                     <!-- Progress Bar -->
                     <div class="progress-container mb-8">
-                        <div class="progress-bar" style="width: 25%;"></div>
+                        <div class="progress-bar" id="progress-bar" style="width: 25%;"></div>
                     </div>
                     
                     <!-- Step 1: Organization Details -->
-                    <div class="form-step active">
+                    <div class="form-step active" id="step-1">
                         <h3 class="text-xl font-bold text-gray-800 mb-6">Organization Information</h3>
                         
                         <div class="grid md:grid-cols-2 gap-6">
@@ -594,7 +595,7 @@
                     </div>
                     
                     <!-- Step 2: Partnership Interest -->
-                    <div class="form-step">
+                    <div class="form-step" id="step-2">
                         <h3 class="text-xl font-bold text-gray-800 mb-6">Partnership Interest</h3>
                         
                         <div>
@@ -656,7 +657,7 @@
                     </div>
                     
                     <!-- Step 3: Resources & Capacity -->
-                    <div class="form-step">
+                    <div class="form-step" id="step-3">
                         <h3 class="text-xl font-bold text-gray-800 mb-6">Resources & Capacity</h3>
                         
                         <div>
@@ -695,7 +696,7 @@
                     </div>
                     
                     <!-- Step 4: Proposal Details -->
-                    <div class="form-step">
+                    <div class="form-step" id="step-4">
                         <h3 class="text-xl font-bold text-gray-800 mb-6">Partnership Proposal</h3>
                         
                         <div>
@@ -722,14 +723,14 @@
                     
                     <!-- Navigation Buttons -->
                     <div class="flex justify-between pt-8">
-                        <button type="button" class="prev-step bg-gray-500 text-white hover:bg-gray-600 px-6 py-3 rounded-lg font-semibold transition-colors" style="display: none;">
+                        <button type="button" id="prev-btn" class="prev-step bg-gray-500 text-white hover:bg-gray-600 px-6 py-3 rounded-lg font-semibold transition-colors" style="display: none;">
                             Previous
                         </button>
                         <div class="flex-1"></div>
-                        <button type="button" class="next-step bg-green-600 text-white hover:bg-green-700 px-6 py-3 rounded-lg font-semibold transition-colors">
+                        <button type="button" id="next-btn" class="next-step bg-green-600 text-white hover:bg-green-700 px-6 py-3 rounded-lg font-semibold transition-colors">
                             Next Step
                         </button>
-                        <button type="submit" class="submit-form bg-green-600 text-white hover:bg-green-700 px-6 py-3 rounded-lg font-semibold transition-colors" style="display: none;">
+                        <button type="submit" id="submit-btn" class="submit-form bg-green-600 text-white hover:bg-green-700 px-6 py-3 rounded-lg font-semibold transition-colors" style="display: none;">
                             Submit Proposal
                         </button>
                     </div>
@@ -814,6 +815,46 @@
             </div>
         </div>
     </footer>
+        <!-- Multi-Step Form Logic -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const form = document.getElementById('partnership-form-element');
+                const steps = document.querySelectorAll('.form-step');
+                const progressBar = document.getElementById('progress-bar');
+                const nextBtn = document.getElementById('next-btn');
+                const prevBtn = document.getElementById('prev-btn');
+                const submitBtn = document.getElementById('submit-btn');
+        
+                let currentStep = 0;
+        
+                function showStep(n) {
+                    steps.forEach((step, i) => step.classList.toggle('active', i === n));
+        
+                    const progress = ((n + 1) / steps.length) * 100;
+                    progressBar.style.width = progress + '%';
+        
+                    prevBtn.style.display = n === 0 ? 'none' : 'block';
+                    nextBtn.style.display = n === steps.length - 1 ? 'none' : 'block';
+                    submitBtn.style.display = n === steps.length - 1 ? 'block' : 'none';
+                }
+        
+                nextBtn.addEventListener('click', () => {
+                    if (currentStep < steps.length - 1) {
+                        currentStep++;
+                        showStep(currentStep);
+                    }
+                });
+        
+                prevBtn.addEventListener('click', () => {
+                    if (currentStep > 0) {
+                        currentStep--;
+                        showStep(currentStep);
+                    }
+                });
+        
+                showStep(0);
+            });
+            </script>
 
     <!-- JavaScript -->
     <script src="main.js"></script>
