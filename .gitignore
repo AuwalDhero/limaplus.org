@@ -1,0 +1,10 @@
+# Environment variables
+.env
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Logs and temp files
+*.log
+.DS_Store

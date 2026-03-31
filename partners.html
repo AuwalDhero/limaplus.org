@@ -737,6 +737,7 @@
                 </form>
             </div>
         </div>
+        
     </section>
 
     <!-- Call to Action -->
@@ -816,45 +817,69 @@
         </div>
     </footer>
         <!-- Multi-Step Form Logic -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const form = document.getElementById('partnership-form-element');
-                const steps = document.querySelectorAll('.form-step');
-                const progressBar = document.getElementById('progress-bar');
-                const nextBtn = document.getElementById('next-btn');
-                const prevBtn = document.getElementById('prev-btn');
-                const submitBtn = document.getElementById('submit-btn');
-        
-                let currentStep = 0;
-        
-                function showStep(n) {
-                    steps.forEach((step, i) => step.classList.toggle('active', i === n));
-        
-                    const progress = ((n + 1) / steps.length) * 100;
-                    progressBar.style.width = progress + '%';
-        
-                    prevBtn.style.display = n === 0 ? 'none' : 'block';
-                    nextBtn.style.display = n === steps.length - 1 ? 'none' : 'block';
-                    submitBtn.style.display = n === steps.length - 1 ? 'block' : 'none';
+        <!-- Replace the entire <script> block at the bottom with this corrected version -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('partnership-form-element');
+        const steps = document.querySelectorAll('.form-step');
+        const progressBar = document.getElementById('progress-bar');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const submitBtn = document.getElementById('submit-btn');
+
+        let currentStep = 0;
+
+        function showStep(n) {
+            steps.forEach((step, i) => step.classList.toggle('active', i === n));
+
+            const progress = ((n + 1) / steps.length) * 100;
+            progressBar.style.width = progress + '%';
+
+            prevBtn.style.display = n === 0 ? 'none' : 'block';
+            nextBtn.style.display = n === steps.length - 1 ? 'none' : 'block';
+            submitBtn.style.display = n === steps.length - 1 ? 'block' : 'none';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        // Backend submission (minimal change)
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('https://limaplus-org.onrender.com/submit-partnership', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const html = await response.text();
+                    document.body.innerHTML = html;   // Show server thank-you page
+                } else {
+                    alert('Submission failed. Please try again or contact us directly.');
                 }
-        
-                nextBtn.addEventListener('click', () => {
-                    if (currentStep < steps.length - 1) {
-                        currentStep++;
-                        showStep(currentStep);
-                    }
-                });
-        
-                prevBtn.addEventListener('click', () => {
-                    if (currentStep > 0) {
-                        currentStep--;
-                        showStep(currentStep);
-                    }
-                });
-        
-                showStep(0);
-            });
-            </script>
+            } catch (err) {
+                console.error(err);
+                alert('Network error. Please try again.');
+            }
+        });
+
+        showStep(0);
+    });
+</script>
 
     <!-- JavaScript -->
     <script src="main.js"></script>
